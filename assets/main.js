@@ -9,6 +9,7 @@ const mainPara = document.createElement("p");
 let bearCheck = false;
 //create variable for how long waiting
 let wait = 0;
+let timer;
 
 
 //Create function that starts the game
@@ -18,7 +19,8 @@ const startGame = function() {
   //create a variable for a div
   const content = document.createElement("div");
   //add text to main paragraph
-  mainPara.textContent = "You awake in a dimly lit room. There are doors to your left and right. Which do you want to do?";
+  mainPara.textContent = "";
+  scrollingText("You awake in a dimly lit room. There are doors to your left and right. Which do you want to do?")
   //append content into the main
   main.appendChild(content);
   //append the paragraph into the div(content)
@@ -40,10 +42,12 @@ const startGame = function() {
   button2.addEventListener("click", waitHere = () => {
     //display first message when waiting
     if (wait === 0) {
-      mainPara.textContent = "You decide to wait for some time. Nothing happens. What do you want to do?"
+      mainPara.textContent = ""
+      scrollingText("You decide to wait for some time. Nothing happens. What do you want to do?")
       //Second message
     } else if (wait > 0 && wait < 15) {
-      mainPara.textContent = "You continue to wait. For what reason, you don't know. What do you want to do?"
+      mainPara.textContent = ""
+      scrollingText("You continue to wait. For what reason, you don't know. What do you want to do?")
     } else if (wait === 15) {
       //if they continue throw them in waiting room
      return waitingRoom();
@@ -64,7 +68,8 @@ const startGame = function() {
 //create waitingRoom
 const waitingRoom = function () {
   //change text of mainPara
-  mainPara.textContent = `The waiting seems to have paid off as the floor opens up underneath and you fall onto a mat in a new room. There is a man standing in the otherwise empty room. "Since you don't feel like playing neither do I, do as you wish." The man walks out the door. What do you do now?`
+  mainPara.textContent = ``
+  scrollingText(`The waiting seems to have paid off as the floor opens up underneath and you fall onto a mat in a new room. There is a man standing in the otherwise empty room. "Since you don't feel like playing neither do I, do as you wish." The man walks out the door. What do you do now?`)
   //reset wait to zero
   wait = 0;
   //removeEventListener
@@ -84,9 +89,11 @@ const waitingRoom = function () {
   button1.addEventListener('click', waitHere = ()=> {
     //slightly altered code from first wait
     if (wait === 0) {
-      mainPara.textContent = "It worked before so why not try it again. You wait for some time and nothing happens. What do you want to do?"
+      mainPara.textContent = ""
+      scrollingText("It worked before so why not try it again. You wait for some time and nothing happens. What do you want to do?")
     } else if (wait > 0 && wait <10) {
-      mainPara.textContent = "You continue to wait in the room. Nothing happens. What do you want to do?";
+      mainPara.textContent = "";
+      scrollingText("You continue to wait in the room. Nothing happens. What do you want to do?")
     } else if (wait === 10) {
       return death ("You continue to wait and wait until you pass out from starvation.");
     }
@@ -107,7 +114,8 @@ const waitingRoom = function () {
 //pitrap function here
 const pitTrap = function() {
   //change text of main paragraph
-  mainPara.textContent = "You take a step into the room and find yourself sliding down a ramp. Quick, press spacebar to jump!";
+  mainPara.textContent = "";
+  scrollingText("You take a step into the room and find yourself sliding down a ramp. Quick, press spacebar to jump!")
   //remove buttons
   const section = document.querySelector('#buttonArea');
   const button1 = document.querySelector('button');
@@ -137,7 +145,8 @@ const pitTrap = function() {
 //hallway function
 const hallway = function () {
   //change text of mainPara
-  mainPara.textContent = 'You jump from the ramp and land roughly. You stand up and find yourself in a hallway with two directions. Which way do you go? (Use "d" for right and "a" for left.)'
+  mainPara.textContent = ''
+  scrollingText('You jump from the ramp and land roughly. You stand up and find yourself in a hallway with two directions. Which way do you go? (Use "d" for right and "a" for left.)')
   //function for key presses
   const keys = function(event) {
     if (event.key == "a") {
@@ -162,7 +171,8 @@ const ghostRoom = function() {
   //variable for ghost is false
   let ghost =false;
   //change the mainPara text
-  mainPara.textContent = "You walk down the right hallway to find yourself in another room. You see 2 doors, one appears to be a closet door. There is also a table in the center of the room. The room is quite cold for some reason. What do you do?"
+  mainPara.textContent = ""
+  scrollingText("You walk down the right hallway to find yourself in another room. You see 2 doors, one appears to be a closet door. There is also a table in the center of the room. The room is quite cold for some reason. What do you do?")
   //add 3 buttons
   const section = document.querySelector('#buttonArea');
   const button1 = document.createElement("button");
@@ -181,7 +191,8 @@ const ghostRoom = function() {
   button1.addEventListener('click', door = ()=> {
     // if no key, it's locked
     if (key == false) {
-      mainPara.textContent = "You try to open the door but it appears to be locked. Maybe you need a key. What do you do?";
+      mainPara.textContent = "";
+      scrollingText("You try to open the door but it appears to be locked. Maybe you need a key. What do you do?")
     //if key , opens to new Room
     } else if (key == true) {
       return goldRoom();
@@ -191,26 +202,30 @@ const ghostRoom = function() {
   button2.addEventListener('click', table = ()=> {
     //if cloth false remove cloth to find hand
     if (cloth == false) {
-      mainPara.textContent = "You approach the table and lift the tablecloth. What appears to be a severed hand is laying underneath the cloth. Disgusted you walk away. What do you do now?"
+      mainPara.textContent = ""
+      scrollingText("You approach the table and lift the tablecloth. What appears to be a severed hand is laying underneath the cloth. Disgusted you walk away. What do you do now?")
       //cloth equals true
       cloth = true;
       //change button to check hand
       button2.textContent = "hand";
       //if cloth equals true, look at hand decide not to take it
     } else if(cloth == true) {
-      mainPara.textContent = "The hand is still where you left it. It's very gross. You decide to back away. What do you do now?"
+      mainPara.textContent = ""
+      scrollingText("The hand is still where you left it. It's very gross. You decide to back away. What do you do now?")
     }
   });
   //button3 check closet
   button3.addEventListener('click', closet = ()=> {
     //if ghost false, open doors and find ghost head
     if (ghost == false) {
-      mainPara.textContent = "You open the closet door. A ghostly head is floating in front of you. Seeing you the head screams. You slam the door closed and jump away. What do you do now?";
+      mainPara.textContent = "";
+      scrollingText("You open the closet door. A ghostly head is floating in front of you. Seeing you the head screams. You slam the door closed and jump away. What do you do now?")
       //set ghost to true
       ghost = true;
     //if ghost true, pick up key on ground
     } else if (ghost ==true) {
-      mainPara.textContent = "Mustering your courage you open the closet door again. The ghost appears to be gone. You see a key lying on the ground and decide to pick it up. Now what do you do?";
+      mainPara.textContent = "";
+      scrollingText("Mustering your courage you open the closet door again. The ghost appears to be gone. You see a key lying on the ground and decide to pick it up. Now what do you do?")
       //set key to true
       key = true;
     }
@@ -221,7 +236,8 @@ const ghostRoom = function() {
 //add death function
 const death = function(string) {
   //change text of paragraph
-  mainPara.textContent = string + " You are dead. Play again?";
+  mainPara.textContent = "";
+  scrollingText(string + " You are dead. Play again?")
   //remove buttons
   const section = document.querySelector('#buttonArea');
   const button1 = document.querySelector('button');
@@ -240,7 +256,8 @@ const bearRoom = function() {
   //chang bearCheck to true
   bearCheck = true;
   //change text of main paragraph
-  mainPara.textContent = "There is a bear in here. It's sitting in front of another door eating from a pot of honey. How are you going to move the bear?";
+  mainPara.textContent = "";
+  scrollingText("There is a bear in here. It's sitting in front of another door eating from a pot of honey. How are you going to move the bear?")
   //store section in a variable
   const buttonSection = document.querySelector("#buttonArea");
   //store all buttons in variables
@@ -258,7 +275,8 @@ const bearRoom = function() {
   //event listeners for each button
   button1.addEventListener('click', taunt = ()=> {
     if (bearMoved == false) {
-      mainPara.textContent = "The bear looks mad but moves away from the door. What do you want to do?"
+      mainPara.textContent = ""
+      scrollingText("The bear looks mad but moves away from the door. What do you want to do?")
       //change bearMoved to true
       bearMoved = true;
     } else if (bearMoved == true) {
@@ -284,7 +302,8 @@ const bearRoom = function() {
 const goldRoom = function() {
   //set variable for amount of gold
   let gold = 0;
-  mainPara.textContent = "You enter the room and find yourself staring at a room full of gold. On the other side of the room there's a door. What do you do?";
+  mainPara.textContent = "";
+  scrollingText("You enter the room and find yourself staring at a room full of gold. On the other side of the room there's a door. What do you do?")
   //store buttons in variables and remove event listeners
   const button1 = document.querySelector('button');
   const button2 = document.getElementsByTagName('button')[1];
@@ -306,11 +325,13 @@ const goldRoom = function() {
   //add event listeners button1
   button1.addEventListener('click', someGold = () => {
     if (gold === 0) {
-      mainPara.textContent = "You've taken some gold.";
+      mainPara.textContent = "";
+      scrollingText("You've taken some gold.")
       gold++;
       button1.textContent = "Take more?";
     } else if (gold === 1) {
-      mainPara.textContent = "You've taken some more gold. You're pockets are feeling heavy.";
+      mainPara.textContent = "";
+      scrollingText("You've taken some more gold. You're pockets are feeling heavy.")
       gold++;
     } else if (gold === 2) {
       return death("You've been greedy. The floor opens up and swallows you whole.");
@@ -324,15 +345,18 @@ const goldRoom = function() {
   button3.addEventListener('click', door = () => {
     //option for taking no gold
     if (gold === 0) {
-      mainPara.textContent = "You open the door and find yourself outside. You've survived."
+      mainPara.textContent = ""
+      scrollingText("You open the door and find yourself outside. You've survived.")
     };
     //option for taking some gold
     if (gold === 1) {
-      mainPara.textContent = "You open the door and find the outdoors to greet you. You've survived, and a little richer to boot."
+      mainPara.textContent = ""
+      scrollingText("You open the door and find the outdoors to greet you. You've survived, and a little richer to boot.")
     };
     //option for taking alot of gold
     if (gold === 2) {
-      mainPara.textContent = "You open the door and find the outdoors to greet you. You've survived, and with quite a bit of gold as reward."
+      mainPara.textContent = ""
+      scrollingText("You open the door and find the outdoors to greet you. You've survived, and with quite a bit of gold as reward.")
     };
     //delete buttons
     const section = document.querySelector('section');
@@ -342,4 +366,31 @@ const goldRoom = function() {
   });
 }
 //Starting the game
+
+function scrollingText(string1) {
+  //set timerCount to zero, this will help look through the string
+  let timerCount = 0
+  //if the timer is currently in use
+  if (typeof timer !== 'undefined') {
+    //clear timer
+    clearInterval(timer)
+  }
+  //start timer
+  timer = setInterval(() => {
+    //pull 1 letter from string
+    let currentLetter = string1[timerCount]
+    //add that letter to the main text element
+    mainPara.textContent += currentLetter
+    //move to the next letter
+    timerCount++
+
+    // if we arrive at last letter
+    if (string1[timerCount] === undefined) {
+      //stop the timer
+      clearInterval(timer)
+    }
+  }, 25)
+}
+
+
 startGame();
