@@ -38,12 +38,12 @@ function confidentType() {
 
   //change the game text
   gameText.textContent = ''
-  scrollingText("You're so confident you stop in your tracks and prepare to fight. How do you draw your weapons")
+  scrollingText("You're so confident you stop in your tracks and prepare to fight. Which weapon do you draw?")
 
   //button 1 leads to death
   button1.textContent = 'Just your dagger'
   button1.addEventListener('click', event => {
-    gameOver('You try to fight them, but a small dagger was not enough to defend yourself and you die a valiant death')
+    gameOver('You try to fight them, but a small dagger was not enough to defend yourself. You die a valiant death.')
   })
 
   // this is the only surviving option
@@ -54,7 +54,7 @@ function confidentType() {
   button3.textContent = 'Why not both?'
   button3.style.display = 'block'
   button3.addEventListener('click', event => {
-    gameOver('You dont know how to wield both efficiently, you got overconfient and died.')
+    gameOver(`You don't know how to wield both efficiently. You got overconfient and died.`)
   })
 }
 
@@ -65,7 +65,7 @@ function survivedMonsters() {
 
   //change the game text
   gameText.textContent = ''
-  scrollingText('You survived the monsters but you are severely hurt, you meet up with your partner and decide what to do next. This is end of this path, please refresh')
+  scrollingText('You survived the monsters, but are severely hurt. You meet up with your partner and decide what to do next. This is end of this path, please refresh!')
 
   //change button text
   button1.textContent = 'Hide in a nearby building'
@@ -85,7 +85,7 @@ function meetPartner() {
 
   //set game text
   gameText.textContent = ''
-  scrollingText('You meet your partner in a clearing. you can choose to set traps, or keep running.')
+  scrollingText('You meet your partner in a clearing. You can choose to set traps, or keep running.')
 
 
   //add new text and event listener
@@ -104,11 +104,11 @@ function keepRunning() {
   //if they did not place traps display this
   if (!player.traps) {
     gameText.textContent = ''
-    scrollingText('You kept running until you came across a building, it looks old and abandoned.')
+    scrollingText('You keep running until you come across a building. It looks old and abandoned.')
   } else {
     //if they did place traps display this message
     gameText.textContent = ''
-    scrollingText('As you keep running you hear and explosion behind you, you come across a old building that looks abandoned')
+    scrollingText('As you keep running you hear an explosion behind you. You come across an old building that looks abandoned.')
     player.timesRan = 1
   }
 
@@ -128,12 +128,12 @@ function setTraps() {
 
   //change main text
   gameText.textContent = ''
-  scrollingText('you set traps behind you. will you wait for survivors or continue running')
+  scrollingText('You set traps behind you. Will you wait for survivors, or continue running?')
 
 
   //change button text
   button1.textContent = 'Wait for Survivors'
-  button2.textContent = 'get a lead while you can'
+  button2.textContent = 'Get a lead while you can'
   button2.addEventListener('click', keepRunning)
 }
 
@@ -143,7 +143,7 @@ function insideBuilding() {
 
   //change the game text
   gameText.textContent = ''
-  scrollingText('Your inside the building and push furniture agianst he door to keep them out. you and your partner decide to sweep the building to make sure no one is inside.')
+  scrollingText(`You're inside the building and push furniture agianst the door to keep them out. You and your partner decide to sweep the building to make sure no one is inside.`)
 
 
   //change button text
@@ -159,7 +159,7 @@ function insideBuilding() {
 function gameOver(text) {
   //change main text element
   gameText.textContent = ''
-  scrollingText(text + '. To start over refresh the page')
+  scrollingText(text + '. To start over refresh the page.')
 
   //set each buttons display to none
   for (let button of buttons) {
